@@ -2,5 +2,5 @@ Flask==2.2.2
 gunicorn==20.1.0
 pandas==1.5.2
 yfinance==0.1.74
-pandas-ta==0.3.14
+pandas-ta==0.3.13
 tkinter==0.1.0
