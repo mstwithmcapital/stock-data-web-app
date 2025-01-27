@@ -4,3 +4,4 @@ pandas==1.5.2
 yfinance==0.1.74
 pandas-ta==0.3.14b0
 Werkzeug==1.0.1 
+Jinja2==3.0.0
