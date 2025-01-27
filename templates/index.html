@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Data App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Add some custom styling for the JSON display */
+        .json-output {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: "Courier New", monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center">Stock Data with Technical Indicators</h1>
+        <form action="/fetch" method="POST" class="mt-3">
+            <div class="form-group">
+                <label for="ticker">Select a Stock or Enter Ticker:</label>
+                <input type="text" name="ticker" id="ticker" class="form-control" placeholder="Enter stock ticker (e.g., TCS.NS)">
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Fetch Data</button>
+        </form>
+
+        <div class="mt-5">
+            <h3>Stock Data</h3>
+            <!-- Render the stock data table here -->
+            <div>
+                {{ data|safe }}
+            </div>
+
+            <div class="mt-3">
+                <!-- Render the download link here -->
+                {{ download_link|safe }}
+            </div>
+
+            <div class="mt-3">
+                <h4>JSON Data</h4>
+                <div class="json-output" id="json-output">
+                    <pre>{{ json_data|safe }}</pre>
+                </div>
+                <button class="btn btn-info mt-3" onclick="copyJSON()">Copy JSON</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyJSON() {
+            // Get the JSON data text
+            var jsonData = document.getElementById("json-output").innerText;
+
+            // Create a temporary text area to copy the text
+            var tempTextArea = document.createElement("textarea");
+            tempTextArea.value = jsonData;
+            document.body.appendChild(tempTextArea);
+
+            // Select and copy the text
+            tempTextArea.select();
+            document.execCommand("copy");
+
+            // Remove the temporary text area
+            document.body.removeChild(tempTextArea);
+
+            // Alert the user
+            alert("JSON copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
